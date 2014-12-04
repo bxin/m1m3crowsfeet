@@ -1,4 +1,4 @@
-function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
+function sf1d=sf1dcomp(sf2d,sep)
 
 % original author: Brent Ellerbroek (brente@tmt.org)
 % modified and adopted for LSST use by:
@@ -6,35 +6,32 @@ function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
 
 % Terms of use is at the end of this code
 
-% Description: calculate the structure function of an optical surface.
+% Description: evaluate the 1d structure function at given separation
 %
 % input:
-% mask:  n by n, [0,1]-valued function defining the aperture, with origin at
-%        the point (n/2+1,n/2+1)
-% S:     n by n surface map (outside of the aperture will be zeroed out by mask)
-%        (in case of a mirror surface, if wavefront phase is desired, the
-%        factor of 2 should be applied externally)
 % sep:   vector of separations at which to compute the 1-d structure
-%        function. The unit is pixel, since this subroutine doesn't know
-%        anything about the physical scale of the surface map
-
-% output:
-% sf1d:  1-d structure function evaluated at the separations sep  
+%        function
 % sf2d:  2d structure function of size 2n by 2n, with the origin located at
 %        the point (n+1,n+1)
+% output:
+% sf1d:  1-d structure function evaluated at the separations sep
 
-fprintf('strucFuncFFT started at %s\n',datestr(datetime));
+n=size(sf2d,1)/2;
+x=-1/2 : 1/(2*n) : (1/2-1/(2*n));
+[x,y]=meshgrid(x);
+kap=sqrt(x.^2+y.^2);
 
-S(isnan(S))=0;
-S=S.*mask;
+sfdom = (sf2d ~= 0);
+sfdom(n+1,n+1)=1;
+sfhat=fftshift(fft2(fftshift(sf2d)));
+sfdomhat=fftshift(fft2(fftshift(sfdom)));
 
-sf2d=sf2dcomp(mask,S);
-sf1d=sf1dcomp(sf2d,sep);
-
-%our structure function is defined as sqrt(D)
-sf1d = abs((sf1d).^0.5);
-
-fprintf('strucFuncFFT ended at %s\n',datestr(datetime));
+sf1d=zeros(size(sep));
+for j=1:length(sep)
+    r=sep(j);
+    wf=besselj(0,2*pi*r*kap);
+    sf1d(j)=real(sum(sum(wf.*sfhat))/sum(sum(wf.*sfdomhat)));
+end
 
 end
 
@@ -50,3 +47,4 @@ end
 % You can cite the subroutine as
 % Author, computer code Title of the file (https://github.com/bxin/m1m3crowsfeet), 
 % Large Synoptic Survey Telescope, Tucson, Arizona, 2014
+

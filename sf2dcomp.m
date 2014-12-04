@@ -1,4 +1,4 @@
-function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
+function sf2d=sf2dcomp(mask,S)
 
 % original author: Brent Ellerbroek (brente@tmt.org)
 % modified and adopted for LSST use by:
@@ -6,35 +6,45 @@ function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
 
 % Terms of use is at the end of this code
 
-% Description: calculate the structure function of an optical surface.
-%
-% input:
-% mask:  n by n, [0,1]-valued function defining the aperture, with origin at
+% Description: calculate the 2d structure function of an optical surface.
+
+% input
+% mask:   n by n, [0,1]-valued function defining the aperture, with origin at
 %        the point (n/2+1,n/2+1)
-% S:     n by n surface map (outside of the aperture will be zeroed out by mask)
-%        (in case of a mirror surface, if wavefront phase is desired, the
-%        factor of 2 should be applied externally)
-% sep:   vector of separations at which to compute the 1-d structure
-%        function. The unit is pixel, since this subroutine doesn't know
-%        anything about the physical scale of the surface map
+% S:     n by n surface profile (must be zero outside of the aperture)
 
 % output:
-% sf1d:  1-d structure function evaluated at the separations sep  
 % sf2d:  2d structure function of size 2n by 2n, with the origin located at
 %        the point (n+1,n+1)
 
-fprintf('strucFuncFFT started at %s\n',datestr(datetime));
+n=size(mask,1);
+mask2=zeros(2*n);
+mask2((n/2+1):(2*n-n/2),(n/2+1):(2*n-n/2))=mask;
+S2=zeros(2*n);
+S2((n/2+1):(2*n-n/2),(n/2+1):(2*n-n/2))=S;
+Ssq2=S2.*S2.*mask2;
 
-S(isnan(S))=0;
-S=S.*mask;
+maskhat=fftshift(fft2(fftshift(mask2)));
+Shat=fftshift(fft2(fftshift(S2)));
+Ssqhat=fftshift(fft2(fftshift(Ssq2)));
 
-sf2d=sf2dcomp(mask,S);
-sf1d=sf1dcomp(sf2d,sep);
+maskmaskstar=maskhat.*conj(maskhat);
+SSstar=Shat.*conj(Shat);
+Ssqmaskstar=Ssqhat.*conj(maskhat);
 
-%our structure function is defined as sqrt(D)
-sf1d = abs((sf1d).^0.5);
+maskacf=fftshift(ifft2(fftshift(maskmaskstar)));
+Sacf=fftshift(ifft2(fftshift(SSstar)));
+Smaskccf=fftshift(ifft2(fftshift(Ssqmaskstar)));
 
-fprintf('strucFuncFFT ended at %s\n',datestr(datetime));
+ind=[1 2*n:-1:2];
+numer=Smaskccf+Smaskccf(ind,ind)-2*Sacf;
+denom=maskacf;
+
+numer=real(numer);
+denom=real(denom);
+ind=find(denom > 1d-6*sum(sum(mask)));
+sf2d=zeros(2*n);
+sf2d(ind)=numer(ind)./denom(ind);
 
 end
 
