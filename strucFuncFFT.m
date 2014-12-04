@@ -10,9 +10,11 @@ function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
 % mask:  n by n, [0,1]-valued function defining the aperture, with origin at
 %        the point (n/2+1,n/2+1)
 % S:     n by n surface map (outside of the aperture will be zeroed out by mask)
+%        (if wavefront phase is desired, the factor of 2 should be applied
+%        externally)
 % sep:   vector of separations at which to compute the 1-d structure
 %        function. The unit is pixel, since this subroutine doesn't know
-%        anything about the physical scale of the map
+%        anything about the physical scale of the surface map
 
 % output:
 % sf1d:  1-d structure function evaluated at the separations sep  
