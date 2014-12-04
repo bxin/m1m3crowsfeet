@@ -2,6 +2,7 @@ function [newS,idxmask,xnorm,ynorm] = generate_crows_feet(S,nreso,xnorm,ynorm,..
     OR,ORC,IRC,nfeet,sigmal,sigmah,depth,airbubble)
 
 % author: Bo Xin (bxin@lsst.org)
+%         Large Synoptic Survey Telescope, Tucson, AZ 85719
 
 % Terms of use is at the end of this code
 
@@ -173,15 +174,12 @@ end
 end
 
 %% Terms of use
-% This subroutine is copyrighted in the name of its author(s) and the 
-% Large Synoptic Survey Telescope, under management of 
-% the Association of Universities for Research in Astronomy (AURA).
-% If it is modified from code written by others from a different institution, 
-% we have obtained appropriate permission to use and distribute the code.
+% This subroutine is copyrighted in the name of its author(s) and the
+% affiliated institutions. 
 % It is free and you are welcome to use it for your research.  It is 
 % distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.  
 % We would appreciate acknowledgement when the subroutine is used.  
 % You can cite the subroutine as
-% Author, computer code Title of the file (https://github.com/bxin/m1m3crowsfeet), 
-% Large Synoptic Survey Telescope, Tucson, Arizona, 2014
+% Author, computer code title of the file,
+% (https://github.com/bxin/m1m3crowsfeet),2014
 

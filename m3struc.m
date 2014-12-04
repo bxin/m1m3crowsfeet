@@ -1,6 +1,7 @@
 function [] = m3struc(nreso,nbig,nsmall,airbubble,simg,sft) %,sbf)
 
 % author: Bo Xin (bxin@lsst.org)
+%         Large Synoptic Survey Telescope, Tucson, AZ 85719
 
 % Terms of use is at the end of this code
 
@@ -24,12 +25,12 @@ function [] = m3struc(nreso,nbig,nsmall,airbubble,simg,sft) %,sbf)
 %           (this not used for now)
 %
 % output file names are like
-%       sfm3_1000_600_100_ft.mat
-%       sfm3_1000_600_100_bf.mat
-%       sfm3_1000_0_0_ml.mat
+%       sfm3_1006_25_300_0_ft.mat
+%       sfm3_1006_25_300_0_bf.mat
+%       sfm3_1006_0_0_0_ml.mat
 % the variables inside are like
-%       sfft, spft, sfbf, spbf,
-%       (ft for Fourier Transform, bf for Brute Force,
+%       sfft, spft, sfbf, spbf, sfsp, spsp
+%       (ft for Fourier Transform, bf for Brute Force,sp for SPecification,
 %       sf for Structure Function, sp for SeParation)
 % examples:
 %       m3struc(1006,0,0,0,1,1,1);
@@ -181,14 +182,11 @@ xlabel('Separation (m)');ylabel('Structure Function (sqrt(D)) (nm)');
 end
 
 %% Terms of use
-% This subroutine is copyrighted in the name of its author(s) and the 
-% Large Synoptic Survey Telescope, under management of 
-% the Association of Universities for Research in Astronomy (AURA).
-% If it is modified from code written by others from a different institution, 
-% we have obtained appropriate permission to use and distribute the code.
+% This subroutine is copyrighted in the name of its author(s) and the
+% affiliated institutions. 
 % It is free and you are welcome to use it for your research.  It is 
 % distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.  
 % We would appreciate acknowledgement when the subroutine is used.  
 % You can cite the subroutine as
-% Author, computer code Title of the file (https://github.com/bxin/m1m3crowsfeet), 
-% Large Synoptic Survey Telescope, Tucson, Arizona, 2014
+% Author, computer code title of the file,
+% (https://github.com/bxin/m1m3crowsfeet),2014

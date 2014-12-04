@@ -1,8 +1,10 @@
 function sf1d=sf1dcomp(sf2d,sep)
 
 % original author: Brent Ellerbroek (brente@tmt.org)
+%        Thirty Meter Telescope Observatory, Pasadena, CA 91125
 % modified and adopted for LSST use by:
 %        Bo Xin (bxin@lsst.org) and Ming Liang (mliang@noao.edu)
+%         Large Synoptic Survey Telescope, Tucson, AZ 85719
 
 % Terms of use is at the end of this code
 
@@ -36,15 +38,11 @@ end
 end
 
 %% Terms of use
-% This subroutine is copyrighted in the name of its author(s) and the 
-% Large Synoptic Survey Telescope, under management of 
-% the Association of Universities for Research in Astronomy (AURA).
-% If it is modified from code written by others from a different institution, 
-% we have obtained appropriate permission to use and distribute the code.
+% This subroutine is copyrighted in the name of its author(s) and the
+% affiliated institutions. 
 % It is free and you are welcome to use it for your research.  It is 
 % distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.  
 % We would appreciate acknowledgement when the subroutine is used.  
 % You can cite the subroutine as
-% Author, computer code Title of the file (https://github.com/bxin/m1m3crowsfeet), 
-% Large Synoptic Survey Telescope, Tucson, Arizona, 2014
-
+% Author, computer code title of the file,
+% (https://github.com/bxin/m1m3crowsfeet),2014
