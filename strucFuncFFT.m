@@ -11,7 +11,8 @@ function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
 %        the point (n/2+1,n/2+1)
 % S:     n by n surface map (outside of the aperture will be zeroed out by mask)
 % sep:   vector of separations at which to compute the 1-d structure
-%        function
+%        function. The unit is pixel, since this subroutine doesn't know
+%        anything about the physical scale of the map
 
 % output:
 % sf1d:  1-d structure function evaluated at the separations sep  
