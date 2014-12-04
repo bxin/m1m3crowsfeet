@@ -4,6 +4,8 @@ function [sf1d,sf2d]=strucFuncFFT(mask,S,sep)
 % modified and adopted for LSST use by:
 %        Bo Xin (bxin@lsst.org) and Ming Liang (liang@noao.edu)
 
+% Terms of use is at the end of this code
+
 % input:
 % mask:  n by n, [0,1]-valued function defining the aperture, with origin at
 %        the point (n/2+1,n/2+1)
