@@ -42,6 +42,6 @@ end
 % It is free and you are welcome to use it for your research.  It is 
 % distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.  
 % We would appreciate acknowledgement when the subroutine is used.  
-% You can cite subroutines as
+% You can cite the subroutine as
 % Author, computer code Title of the file (https://github.com/bxin/m1m3crowsfeet), 
 % Large Synoptic Survey Telescope, Tucson, Arizona, 2014
