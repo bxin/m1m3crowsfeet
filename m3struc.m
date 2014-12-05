@@ -178,6 +178,7 @@ loglog(spft,sfft,'-k');
 legend({'LSST specification','SOML Reduced M3 map (SOML calculation)',...
     'SOML Reduced M3 map (our calculation)','M3 Synthetic Map (our calculation)'},'Location','SouthEast','FontSize',12);
 xlabel('Separation (m)');ylabel('Structure Function (sqrt(D)) (nm)');
+% text(0.01,30,'LSST M3','FontSize',20);
 
 end
 
